@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Email Validation</title>
+</head>
+<body>
+    <h2>Email Validation</h2>
+    
+    <form id="emailForm">
+        <label>Enter your email:</label>
+        <input type="text" id="email" placeholder="example@email.com">
+        <button type="submit">Validate Email</button>
+    </form>
+    
+    <script>
+        document.getElementById('emailForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value.trim();
+            
+            if (email === '') {
+                alert('Please enter an email address.');
+                document.getElementById('email').focus();
+            } else if (!email.includes('@')) {
+                alert('Please type the email address again. Email must contain @ character.');
+                document.getElementById('email').focus();
+            } else {
+                alert('Valid email address!');
+            }
+        });
+    </script>
+</body>
+</html>
