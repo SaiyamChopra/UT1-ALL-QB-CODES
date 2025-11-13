@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<form id="f" onsubmit="return v(event)">
+  Username: <input id="u" placeholder="5-15 alphanumeric"><br><br>
+  Email: <input id="e" type="email"><br><br>
+  Password: <input id="p" type="password"><br><br>
+  DOB: <input id="d" type="date"><br><br>
+  <button type="submit">Submit</button>
+</form>
+
+<p id="msg"></p>
+
+<script>
+function v(event) {
+  event.preventDefault();
+  const u = document.getElementById('u').value;
+  const e = document.getElementById('e').value;
+  const p = document.getElementById('p').value;
+  const d = document.getElementById('d').value;
+  const m = document.getElementById('msg');
+  
+  // Username validation
+  if (!/^[a-zA-Z0-9]{5,15}$/.test(u)) {
+    m.innerHTML = 'Username must be 5-15 alphanumeric characters';
+    return false;
+  }
+  
+  // Email validation
+  if (!e.includes('@') || !e.includes('.')) {
+    m.innerHTML = 'Invalid email';
+    return false;
+  }
+  
+  // Password validation
+  if (p.length < 8 || !/[A-Z]/.test(p) || !/[a-z]/.test(p) || !/[0-9]/.test(p)) {
+    m.innerHTML = 'Password must be 8+ chars with uppercase, lowercase, and number';
+    return false;
+  }
+  
+  // Age validation
+  const age = (new Date() - new Date(d)) / 31557600000;
+  if (age < 22) {
+    m.innerHTML = 'Must be 22 years or older';
+    return false;
+  }
+  
+  m.innerHTML = 'Form submitted successfully!';
+  m.style.color = 'green';
+  return false;
+}
+</script>
+
+</body>
+</html>
